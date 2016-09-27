@@ -10,11 +10,13 @@ public class Connect4Game {
 		If multiplayer, instantiate player2
 		Start with some player
 		While no one has won
+			If player turn is not AI
+				Prompt playerX to take action
 			player takes an action
 			game checks for win condition
 			if win condition is met
-				display winner
-				end game
+				game displays winner
+				game ends
 			else
 				change to next player
 		*/
