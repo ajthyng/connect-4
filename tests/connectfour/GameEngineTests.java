@@ -23,11 +23,23 @@ public class GameEngineTests {
 	@Test
 	public void gameEngineBoardStateIsBlank() {
 		char[][] board = testEngine.getBoardState();
-		testEngine.showBoard();
 		for (char[] row : board) {
 			for (char col : row) {
 				assertEquals("board is not initialized with underscore", '_', col);
 			}
 		}
+	}
+	
+	@Test
+	public void gameEngineBoardStateIsDrawn() {
+		testEngine.showBoard();
+		testEngine.placePiece(5, '*');
+		testEngine.placePiece(5, '*');
+		testEngine.placePiece(3, '*');
+		testEngine.placePiece(5, '*');
+		testEngine.placePiece(1, '*');
+		testEngine.placePiece(1, '*');
+		testEngine.placePiece(4, '*');
+		testEngine.showBoard();
 	}
 }
