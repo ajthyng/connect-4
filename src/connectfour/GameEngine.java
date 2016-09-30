@@ -2,7 +2,7 @@ package connectfour;
 
 public class GameEngine {
 	private char[][] boardState = new char[6][7];
-	private char emptySpot = '_';
+	final private char EMPTY_SPOT = '_';
 	private String rules;
 	private int playerTurn;
 	private int playerWinner;
@@ -53,14 +53,14 @@ public class GameEngine {
 		this.rules = "Press x to quit at any time.\nEnter a number from 0 through 7 to drop a piece.\nPress f to forfeit the game.\nPress r to display these rules at any time.";
 		for (int i = 0; i < this.boardState.length; i+=1) {
 			for (int j = 0; j < this.boardState[i].length; j+=1) {
-				this.boardState[i][j] = this.emptySpot;
+				this.boardState[i][j] = this.EMPTY_SPOT;
 			}
 		}
 	}
 	
 	
 	public boolean placePiece(int colNum, char playerPiece) {
-		if ( this.boardState[0][colNum] == this.emptySpot ) {
+		if ( this.boardState[0][colNum] == this.EMPTY_SPOT ) {
 			//We can place a piece
 			
 			//Loop through rows starting at 1, since we verified row 0 empty in the initial if statement
@@ -112,7 +112,20 @@ public class GameEngine {
 		System.out.print(board);
 	}
 	
-	public void checkWinner() {
+	public boolean checkWinner(char piece) {
+		boolean result;
+		// check column
+		if (checkColumn(piece))
+			result=true;
+		else if (checkRow(piece))
+			result=true;
+		else if (checkDiagonal(piece))
+			result = true;
+		else
+			result=false;
+		
+		
+		return result;
 		
 	}
 	
@@ -132,15 +145,112 @@ public class GameEngine {
 		
 	}
 	
-	public void checkColumn() {
+	public boolean checkColumn(char piece) {
+		boolean result;
+		int inARow=0;
+		// Check each column for 4 of the specified character in a row
+		int col=0;
+		while (inARow < 4 && col<boardState[0].length){
+			int row=0;
+			while (inARow < 4 && row < boardState.length){
+				if (boardState[row][col] == piece){
+					inARow++;
+				}
+				else if (boardState[row][col] != piece){
+					inARow=0;
+				}
+				row++;
+			}
+			col++;
+		}
+		if (inARow == 4)
+			result = true;
+		else
+			result = false;
+		return result;
+	}
+	
+	public boolean checkRow(char piece) {
+		boolean result;
+		int inARow=0;
+		// Check each row for 4 of the specified character in a row
+		int row=0;
+		while (inARow<4 && row<boardState.length){
+			int col=0;
+			while (inARow < 4 && col < boardState[row].length){
+				if (boardState[row][col] == piece){
+					inARow++;
+				}
+				else if (boardState[row][col] != piece){
+					inARow=0;
+				}
+				col++;
+			}
+			row++;
+		}
+		if (inARow == 4)
+			result = true;
+		else
+			result = false;
+		return result;
 		
 	}
 	
-	public void checkRow() {
-		
-	}
-	
-	public void checkDiagonal() {
-		
+	public boolean checkDiagonal(char piece) {
+		boolean result;
+		int inARow=0;
+		int row,col;
+		// there are only 12 possible diagonals that could contain at least
+		// 4 in a row. First check the 6 that start on the bottom left and
+		// move up and right.
+		// List the possible start locations by row, column pair.
+		int[][] firstStarts = new int[][]{{3,0},{4,0},{5,0},{5,1},{5,2},{5,3}};
+		int i=0;
+		while (inARow <4 && i<firstStarts.length){ // Stop if we find 4 in a row.
+			row = firstStarts[i][0];
+			col = firstStarts[i][1];
+			//System.out.printf("Checking row: %d and col: %d\n", row,col);
+			while (inARow <4 && row >= 0 && col < boardState[0].length){
+				//System.out.println("Current piece is: "+boardState[row][col]);
+				if (boardState[row][col] == piece){
+					inARow++;
+				}
+				else if (boardState[row][col] != piece){
+					inARow=0;
+				}
+				// move right and up
+				//System.out.println("in a row: " + inARow);
+				col++; row--;
+			}
+			i++;
+		}		
+		if (inARow == 4)
+			result = true;
+		else{
+			// Check start on bottom right possible starts and move up and left
+			// List possible start locations by row, column pair.
+			int[][] secondStarts = new int[][]{{3,6},{4,6},{5,6},{5,5},{5,4},{5,3}};
+			i=0;
+			while (inARow <4 && i<secondStarts.length){ // Stop if we find 4 in a row
+				row = secondStarts[i][0];
+				col = secondStarts[i][1];
+				while (inARow <4 && row >=0 && col >=0){
+					if (boardState[row][col] == piece){
+						inARow++;
+					}
+					else if (boardState[row][col] != piece){
+						inARow=0;
+					}
+					// move left and up
+					col--; row--;
+				}
+				i++;
+			}	
+		}
+		if (inARow == 4)
+			result = true;
+		else
+			result = false;
+		return result;
 	}
 }

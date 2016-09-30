@@ -33,13 +33,24 @@ public class GameEngineTests {
 	@Test
 	public void gameEngineBoardStateIsDrawn() {
 		testEngine.showBoard();
-		testEngine.placePiece(5, '*');
-		testEngine.placePiece(5, '*');
-		testEngine.placePiece(3, '*');
-		testEngine.placePiece(5, '*');
-		testEngine.placePiece(1, '*');
-		testEngine.placePiece(1, '*');
-		testEngine.placePiece(4, '*');
+		testEngine.placePiece(0, 'X');
+		testEngine.placePiece(2, 'Y');
+		testEngine.placePiece(2, 'Y');
+		testEngine.placePiece(2, 'X');
+		testEngine.placePiece(5, 'X');
+		testEngine.placePiece(5, 'X');
+		testEngine.placePiece(3, 'X');
+		testEngine.placePiece(3, 'Y');
+		testEngine.placePiece(3, 'Y');
+		testEngine.placePiece(3, 'X');
+		testEngine.placePiece(5, 'X');
+		testEngine.placePiece(1, 'X');
+		testEngine.placePiece(1, 'X');
+		testEngine.placePiece(4, 'X');
 		testEngine.showBoard();
+		System.out.println(testEngine.checkColumn('X'));
+		System.out.println(testEngine.checkRow('X'));
+		System.out.println(testEngine.checkDiagonal('X'));
+		System.out.println(testEngine.checkWinner('X'));
 	}
 }
