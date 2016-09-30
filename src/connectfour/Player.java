@@ -1,17 +1,30 @@
 package connectfour;
 
+import java.util.*;
+
+/**
+ * provides a player for connect4
+ */
 public class Player {
-	private char pieceType;
-	private String playerName;
+	protected char pieceType;
+	protected String playerName;
+	protected int playerNum;
+	protected boolean playing;
+	protected Stack<Integer> history = new Stack<Integer>();
+	
 	
 	public Player() {
 		this.playerName = "Unnamed";
 		this.pieceType = '*';
+		this.playerNum = 0;
+		this.playing = true;
 	}
 	
-	public Player(String name, char piece) {
+	public Player(int num, String name, char piece) {
+		this.playerNum = num;
 		this.playerName = name;
 		this.pieceType = piece;
+		this.playing = true;
 	}
 
 	public char getPieceType() {
@@ -29,12 +42,31 @@ public class Player {
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
 	}
-	
-	public void placePiece (int colNumber) {
-		//Implement a method to place a piece in the column the user has selected, should pass column # to GameEngine
+
+	public int getPlayerNum() {
+		return playerNum;
+	}
+
+	public void setPlayerNum(int playerNum) {
+		this.playerNum = playerNum;
 	}
 	
 	public void forfeit() {
-		//Implement a method to forfeit the game immediately 
+		this.playing=false;		
 	}
+	
+	public boolean isPlaying() {
+		return this.playing;
+	}
+	
+	public boolean placePiece (GameEngine game, int colNumber) {
+		history.add(colNumber);
+		boolean result;
+		result = game.placePiece(colNumber, pieceType);
+		return result;
+	}
+	
+	//public void undoLastMove(){
+	//	history.pop();
+	//}
 }

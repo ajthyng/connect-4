@@ -7,7 +7,9 @@ public class GameEngine {
 	private int playerWinner;
 	private int totalPlays;
 	
-	public void placePiece() {
+	public boolean placePiece(int column, char piecetype) {
+		//placeholder for validation purposes
+		return true;
 		
 	}
 	
@@ -23,7 +25,9 @@ public class GameEngine {
 		
 	}
 	
-	public void endGame() {
+	public boolean endGame() {
+		//placeholder for validation purposes
+		return true;
 		
 	}
 	
