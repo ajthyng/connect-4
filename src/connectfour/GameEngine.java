@@ -52,7 +52,8 @@ public class GameEngine {
 		this.playerTurn = 0;
 		this.playerWinner = -1;
 		this.totalPlays = 0;
-		this.rules = "Press x to quit at any time.\nEnter a number from 0 through 6 to drop a piece.\nPress f to forfeit the game.\nPress r to display these rules at any time.";
+		this.rules = "The objective is to connect 4 of your pieces vertically, horizontally, or diagonally on the game board.\nPress x to quit during the game.\n"
+				   + "Enter a number from 1 through 7 to drop a piece.\nPress f to forfeit the game.\nPress r to display these rules during the game.\n\n";
 		this.initializeBoard();
 	}
 	
@@ -99,13 +100,35 @@ public class GameEngine {
 	}
 	
 	/**
+	 * 
+	 * @return True if the board has no more moves available, false if an open spot exists.
+	 */
+	public boolean checkBoardFull() {
+		
+		boolean boardIsFull = true;
+		for ( int col = 0; col < this.boardState[0].length; col += 1 ) {
+			if (this.boardState[0][col] == this.EMPTY_SPOT) {
+				boardIsFull = false;
+			}
+		}
+		return boardIsFull;
+	}
+	
+	/**
 	 * Displays the game board in its current state.
 	 */
 	public void showBoard() {
 		//String builder for outputting the board
 		StringBuilder board = new StringBuilder();
 		
-		//Create the first line, which is just the "top" pieces of the board
+		//Create the first line, showing column numbers
+		for (int i = 0; i < this.boardState[0].length; i += 1) {
+			board.append(" " + (i + 1) + " ");
+		}
+		
+		board.append("\n");
+		
+		//Create the next line, which is just the "top" pieces of the board
 		for (int i = 0; i < this.boardState[0].length; i += 1) {
 			board.append(" _ ");
 		}
@@ -145,12 +168,12 @@ public class GameEngine {
 		
 	}
 	
-	public void showWinner() {
-		System.out.println("Player " + this.playerWinner + " is the winner!!");
+	public void showWinner(String playerName) {
+		System.out.println(playerName + " is the winner!!\n");
 	}
 	
 	public void endGame(String playerName) {
-		System.out.println("Player " + playerName + " has forfeited.");
+		System.out.println(playerName + " has forfeited.");
 	}
 	
 	public void startNewGame() {
@@ -164,6 +187,7 @@ public class GameEngine {
 		System.out.println("2 - New Two Player Game");
 		System.out.println("3 - View Rules");
 		System.out.println("4 - Exit Game");
+		System.out.print("Select an option: ");
 	}
 	
 	private boolean checkColumn(char piece) {

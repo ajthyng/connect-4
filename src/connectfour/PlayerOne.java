@@ -1,10 +1,13 @@
 package connectfour;
 
 public class PlayerOne extends Player {
-	public boolean requestExit(GameEngine game) {
+	public PlayerOne(int num, String name, char piece) {
+		super(num, name, piece);
+	}
+	public boolean requestExit(GameEngine game) {		
 		this.forfeit();
-		boolean result;
-		result= game.endGame();
-		return result;
+//		boolean result;
+//		result = game.endGame();
+		return false;
 	}
 }

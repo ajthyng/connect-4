@@ -57,7 +57,7 @@ public class Player {
 	}
 	
 	public void forfeit() {
-		this.playing=false;		
+		this.playing=false;
 	}
 	
 	public boolean isPlaying() {
