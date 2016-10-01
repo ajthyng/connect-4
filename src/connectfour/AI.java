@@ -29,9 +29,6 @@ public class AI extends Player{
 			if (! success){
 				columns.remove(col);
 			}
-			// if successful add that pick to history
-			else
-				history.add(col);
 		} while (! success);
 	}
 	
