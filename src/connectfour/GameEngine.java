@@ -46,11 +46,21 @@ public class GameEngine {
 		return this.boardState;
 	}
 	
+	/**
+	 * Default constructor
+	 */
 	public GameEngine() {
 		this.playerTurn = 0;
 		this.playerWinner = -1;
 		this.totalPlays = 0;
-		this.rules = "Press x to quit at any time.\nEnter a number from 0 through 7 to drop a piece.\nPress f to forfeit the game.\nPress r to display these rules at any time.";
+		this.rules = "Press x to quit at any time.\nEnter a number from 0 through 6 to drop a piece.\nPress f to forfeit the game.\nPress r to display these rules at any time.";
+		this.initializeBoard();
+	}
+	
+	/**
+	 * Initialize the board with the EMPTY_SPOT character.
+	 */
+	private void initializeBoard() {
 		for (int i = 0; i < this.boardState.length; i+=1) {
 			for (int j = 0; j < this.boardState[i].length; j+=1) {
 				this.boardState[i][j] = this.EMPTY_SPOT;
@@ -58,7 +68,12 @@ public class GameEngine {
 		}
 	}
 	
-	
+	/**
+	 * Place a piece in the selected column
+	 * @param colNum The column number to drop the piece in: must be 0 through 6.
+	 * @param playerPiece Character representing player's piece
+	 * @return False if the column is full, true if the piece was placed successfully
+	 */
 	public boolean placePiece(int colNum, char playerPiece) {
 		if ( this.boardState[0][colNum] == this.EMPTY_SPOT ) {
 			//We can place a piece
@@ -74,8 +89,6 @@ public class GameEngine {
 					//If we're on the last row and it's still empty, put the piece there.
 					this.boardState[row][colNum] = playerPiece;
 				}
-				
-
 			}
 			
 			return true;
@@ -112,6 +125,11 @@ public class GameEngine {
 		System.out.print(board);
 	}
 	
+	/**
+	 * Method to check whether the given player's piece satisfies a win condition.
+	 * @param piece Player piece to check win condition
+	 * @return True if the player's piece meets winning conditions, false otherwise
+	 */
 	public boolean checkWinner(char piece) {
 		boolean result;
 		// check column
@@ -124,28 +142,32 @@ public class GameEngine {
 		else
 			result=false;
 		
-		
 		return result;
 		
 	}
 	
 	public void showWinner() {
-		
+		System.out.println("Player " + this.playerWinner + " is the winner!!");
 	}
 	
-	public void endGame() {
-		
+	public void endGame(String playerName) {
+		System.out.println("Player " + playerName + " has forfeited.");
 	}
 	
 	public void startNewGame() {
-		
+		this.initializeBoard();
+		this.playerTurn = 0;
+		this.playerWinner = -1;
 	}
 	
 	public void displayMenu() {
-		
+		System.out.println("1 - New Single Player Game");
+		System.out.println("2 - New Two Player Game");
+		System.out.println("3 - View Rules");
+		System.out.println("4 - Exit Game");
 	}
 	
-	public boolean checkColumn(char piece) {
+	private boolean checkColumn(char piece) {
 		boolean result;
 		int inARow=0;
 		// Check each column for 4 of the specified character in a row
@@ -170,7 +192,7 @@ public class GameEngine {
 		return result;
 	}
 	
-	public boolean checkRow(char piece) {
+	private boolean checkRow(char piece) {
 		boolean result;
 		int inARow=0;
 		// Check each row for 4 of the specified character in a row
@@ -196,7 +218,7 @@ public class GameEngine {
 		
 	}
 	
-	public boolean checkDiagonal(char piece) {
+	private boolean checkDiagonal(char piece) {
 		boolean result;
 		int inARow=0;
 		int row,col;

@@ -31,26 +31,80 @@ public class GameEngineTests {
 	}
 	
 	@Test
-	public void gameEngineBoardStateIsDrawn() {
+	public void gameEngineDiagonalWinCondition() {
+		char playerOnePiece = 'X';
+		char playerTwoPiece = 'Y';
+		testEngine.placePiece(0, playerOnePiece);
+		testEngine.placePiece(2, playerTwoPiece);
+		testEngine.placePiece(2, playerTwoPiece);
+		testEngine.placePiece(2, playerOnePiece);
+		testEngine.placePiece(5, playerOnePiece);
+		testEngine.placePiece(5, playerOnePiece);
+		testEngine.placePiece(3, playerOnePiece);
+		testEngine.placePiece(3, playerTwoPiece);
+		testEngine.placePiece(3, playerTwoPiece);
+		testEngine.placePiece(3, playerOnePiece);
+		testEngine.placePiece(5, playerOnePiece);
+		testEngine.placePiece(1, playerOnePiece);
+		testEngine.placePiece(1, playerOnePiece);
+		testEngine.placePiece(4, playerOnePiece);
 		testEngine.showBoard();
-		testEngine.placePiece(0, 'X');
-		testEngine.placePiece(2, 'Y');
-		testEngine.placePiece(2, 'Y');
-		testEngine.placePiece(2, 'X');
-		testEngine.placePiece(5, 'X');
-		testEngine.placePiece(5, 'X');
-		testEngine.placePiece(3, 'X');
-		testEngine.placePiece(3, 'Y');
-		testEngine.placePiece(3, 'Y');
-		testEngine.placePiece(3, 'X');
-		testEngine.placePiece(5, 'X');
-		testEngine.placePiece(1, 'X');
-		testEngine.placePiece(1, 'X');
-		testEngine.placePiece(4, 'X');
+		assertEquals("playerOne did not win with diagonal pieces", true, testEngine.checkWinner(playerOnePiece));
+	}
+	
+	@Test
+	public void gameEngineHorizontalWinCondtion() {
+		char playerOnePiece = 'X';
+		testEngine.placePiece(0, playerOnePiece);
+		testEngine.placePiece(1, playerOnePiece);
+		testEngine.placePiece(2, playerOnePiece);
+		testEngine.placePiece(3, playerOnePiece);
 		testEngine.showBoard();
-		System.out.println(testEngine.checkColumn('X'));
-		System.out.println(testEngine.checkRow('X'));
-		System.out.println(testEngine.checkDiagonal('X'));
-		System.out.println(testEngine.checkWinner('X'));
+		assertEquals("playerOne did not win with horizontal pieces", true, testEngine.checkWinner(playerOnePiece));
+	}
+	
+	@Test
+	public void gameEngineVerticalWinCondition() {
+		char playerOnePiece = 'X';
+		char playerTwoPiece = 'Y';
+		testEngine.placePiece(3, playerOnePiece);
+		testEngine.placePiece(3, playerTwoPiece);
+		testEngine.placePiece(3, playerOnePiece);
+		testEngine.placePiece(3, playerOnePiece);
+		testEngine.placePiece(3, playerOnePiece);
+		testEngine.placePiece(3, playerOnePiece);
+		testEngine.showBoard();
+		assertEquals("playerOne did not win with vertical pieces", true, testEngine.checkWinner(playerOnePiece));
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
