@@ -1,7 +1,5 @@
 package connectfour;
 
-import java.util.*;
-
 /**
  * provides a player for connect4
  */
@@ -10,9 +8,10 @@ public class Player {
 	protected String playerName;
 	protected int playerNum;
 	protected boolean playing;
-	protected Stack<Integer> history = new Stack<Integer>();
 	
-	
+	/**
+	 * Default constructor
+	 */
 	public Player() {
 		this.playerName = "Unnamed";
 		this.pieceType = '*';
@@ -20,6 +19,12 @@ public class Player {
 		this.playing = true;
 	}
 	
+	/**
+	 * 
+	 * @param num Player Number, 1 or 2
+	 * @param name Player's name
+	 * @param piece Player's piece representation
+	 */
 	public Player(int num, String name, char piece) {
 		this.playerNum = num;
 		this.playerName = name;
@@ -58,15 +63,16 @@ public class Player {
 	public boolean isPlaying() {
 		return this.playing;
 	}
-	
+
+	/**
+	 * 
+	 * @param game GameEngine the player is currently using
+	 * @param colNumber Column the player would like to place a piece in
+	 * @return
+	 */
 	public boolean placePiece (GameEngine game, int colNumber) {
-		history.add(colNumber);
 		boolean result;
-		result = game.placePiece(colNumber, pieceType);
+		result = game.placePiece(colNumber, this.pieceType);
 		return result;
 	}
-	
-	//public void undoLastMove(){
-	//	history.pop();
-	//}
 }
