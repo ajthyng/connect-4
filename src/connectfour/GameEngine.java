@@ -207,7 +207,6 @@ public class GameEngine {
 				row++;
 			}
 			col++;
-			inARow=0;
 		}
 		if (inARow == 4)
 			result = true;
@@ -233,7 +232,6 @@ public class GameEngine {
 				col++;
 			}
 			row++;
-			inARow=0;
 		}
 		if (inARow == 4)
 			result = true;
