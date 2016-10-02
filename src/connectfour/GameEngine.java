@@ -197,6 +197,7 @@ public class GameEngine {
 		int col=0;
 		while (inARow < 4 && col<boardState[0].length){
 			int row=0;
+			inARow = 0;
 			while (inARow < 4 && row < boardState.length){
 				if (boardState[row][col] == piece){
 					inARow++;
@@ -222,6 +223,7 @@ public class GameEngine {
 		int row=0;
 		while (inARow<4 && row<boardState.length){
 			int col=0;
+			inARow = 0;
 			while (inARow < 4 && col < boardState[row].length){
 				if (boardState[row][col] == piece){
 					inARow++;
