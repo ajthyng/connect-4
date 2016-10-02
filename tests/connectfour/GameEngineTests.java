@@ -76,6 +76,44 @@ public class GameEngineTests {
 		testEngine.showBoard();
 		assertEquals("playerOne did not win with vertical pieces", true, testEngine.checkWinner(playerOnePiece));
 	}
+	
+	@Test
+	public void gameEngineThinksThisIsAWin() {
+		char playerOnePiece = '1';
+		char playerTwoPiece = 'C';
+		testEngine.placePiece(0, playerOnePiece);
+		testEngine.placePiece(0, playerOnePiece);
+		
+		testEngine.placePiece(1, playerTwoPiece);
+		testEngine.placePiece(1, playerOnePiece);
+		testEngine.placePiece(1, playerTwoPiece);
+		
+		testEngine.placePiece(2, playerTwoPiece);
+		testEngine.placePiece(2, playerTwoPiece);
+		testEngine.placePiece(2, playerOnePiece);
+		testEngine.placePiece(2, playerTwoPiece);
+		
+		testEngine.placePiece(3, playerOnePiece);
+		testEngine.placePiece(3, playerTwoPiece);
+		
+		testEngine.placePiece(4, playerOnePiece);
+		
+		testEngine.placePiece(5, playerTwoPiece);
+		testEngine.placePiece(5, playerTwoPiece);
+		testEngine.placePiece(5, playerOnePiece);
+		
+		testEngine.placePiece(6, playerOnePiece);
+		testEngine.placePiece(6, playerOnePiece);
+		testEngine.placePiece(6, playerOnePiece);
+		testEngine.placePiece(6, playerTwoPiece);
+		testEngine.placePiece(6, playerOnePiece);
+		testEngine.placePiece(6, playerTwoPiece);
+		
+		testEngine.placePiece(6, playerOnePiece);
+		testEngine.showBoard();
+		assertEquals("playerOne won and should not have", false, testEngine.checkWinner(playerOnePiece));
+				
+	}
 }
 
 
