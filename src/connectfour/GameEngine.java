@@ -256,6 +256,7 @@ public class GameEngine {
 		while (inARow <4 && i<firstStarts.length){ // Stop if we find 4 in a row.
 			row = firstStarts[i][0];
 			col = firstStarts[i][1];
+			inARow=0;
 			//System.out.printf("Checking row: %d and col: %d\n", row,col);
 			while (inARow <4 && row >= 0 && col < boardState[0].length){
 				//System.out.println("Current piece is: "+boardState[row][col]);
@@ -281,6 +282,7 @@ public class GameEngine {
 			while (inARow <4 && i<secondStarts.length){ // Stop if we find 4 in a row
 				row = secondStarts[i][0];
 				col = secondStarts[i][1];
+				inARow=0;
 				while (inARow <4 && row >=0 && col >=0){
 					if (boardState[row][col] == piece){
 						inARow++;
